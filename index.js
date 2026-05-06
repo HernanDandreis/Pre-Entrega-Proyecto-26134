@@ -1,16 +1,6 @@
 const method = process.argv[2];
 const endpoint = process.argv[3];
 
-const deleteProduct = (id) => {
-    fetch(`https://fakestoreapi.com/products/${id}`, {
-        method: 'DELETE'
-    })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(err => console.error(err))
-        .finally(() => console.log(`deleteProduct id ${id} finished`));
-}
-
 if (method === 'GET' && endpoint === 'products') {
     const getAllProducts = () => {
     fetch('https://fakestoreapi.com/products')
@@ -49,6 +39,17 @@ else if (method === 'POST' && endpoint === 'products') {
 
 }
 else if (method === 'DELETE' && endpoint.startsWith('products/')) {
+
+const deleteProduct = (id) => {
+    fetch(`https://fakestoreapi.com/products/${id}`, {
+        method: 'DELETE'
+    })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.error(err))
+        .finally(() => console.log(`deleteProduct id ${id} finished`));
+    }
+
     const id = endpoint.split('/')[1];
     deleteProduct(id);
 }
